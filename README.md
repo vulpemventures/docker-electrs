@@ -8,13 +8,13 @@ Dockerfile of the public images [vulpemventures/electrs](https://hub.docker.com/
 Pull the image:
 
 ```bash
-$ docker pull vulpemventures/electrs
+$ docker pull ghcr.io/vulpemventures/electrs
 ```
 
 Run the container:
 
 ```bash
-$ docker run -p 3002:3002 -d vulpemventures/electrs
+$ docker run -p 3002:3002 -d ghcr.io/vulpemventures/electrs
 ```
 
 
@@ -23,11 +23,11 @@ $ docker run -p 3002:3002 -d vulpemventures/electrs
 Pull the image:
 
 ```bash
-$ docker pull vulpemventures/electrs-liquid
+$ docker pull ghcr.io/vulpemventures/electrs-liquid
 ```
 
 Run the container:
 
 ```bash
-$ docker run -p 3002:3002 -d vulpemventures/electrs-liquid
+$ docker run -p 3002:3002 -d ghcr.io/vulpemventures/electrs-liquid
 ```
