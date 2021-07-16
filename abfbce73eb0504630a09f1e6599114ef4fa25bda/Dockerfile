@@ -11,7 +11,7 @@ WORKDIR /electrs
 
 RUN cargo build --release --bin electrs
 
-FROM ubuntu:19.04
+FROM debian:stable-slim
 
 WORKDIR /build
 
