@@ -1,15 +1,15 @@
 FROM rust:latest AS builder
 
-ARG COMMIT abfbce73eb0504630a09f1e6599114ef4fa25bda
+ARG COMMIT ef2434f98b5a60405db5f99af75b7a1e30136ae7
 
 RUN apt-get update
 RUN apt-get install -y clang cmake
 
-RUN git clone https://github.com/blockstream/electrs && cd electrs && git checkout ${COMMIT}
+RUN git clone --no-checkout https://github.com/blockstream/electrs.git && cd electrs && git checkout ${COMMIT}
 
 WORKDIR /electrs
 
-RUN cargo build --release --bin electrs
+RUN cargo build --features electrum-discovery --release --bin electrs
 
 FROM debian:stable-slim
 
