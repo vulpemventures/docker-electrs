@@ -2,15 +2,15 @@ name: Docker
 
 on:
   push:
-    # Publish `master` as Docker `latest` image.
+    # Publish `testnet` as Docker image.
     branches:
-      - master
+      - testnet
 
 env:
   # TODO: Change variable to your image's name.
   BITCOIN_IMAGE_NAME: electrs
   LIQUID_IMAGE_NAME: electrs-liquid
-  COMMIT: abfbce73eb0504630a09f1e6599114ef4fa25bda
+  COMMIT: ef2434f98b5a60405db5f99af75b7a1e30136ae7
 
 jobs:
   # Push image to GitHub Packages.
@@ -44,9 +44,6 @@ jobs:
           docker tag $BITCOIN_IMAGE_NAME $IMAGE_ID:$COMMIT
           docker push $IMAGE_ID:$COMMIT
 
-          docker tag $BITCOIN_IMAGE_NAME $IMAGE_ID:latest
-          docker push $IMAGE_ID:latest
-
   liquid:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
@@ -76,5 +73,3 @@ jobs:
           docker tag $LIQUID_IMAGE_NAME $IMAGE_ID:$COMMIT
           docker push $IMAGE_ID:$COMMIT
 
-          docker tag $LIQUID_IMAGE_NAME $IMAGE_ID:latest
-          docker push $IMAGE_ID:latest
