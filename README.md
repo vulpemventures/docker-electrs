@@ -36,6 +36,6 @@ $ docker run -p 3002:3002 -d ghcr.io/vulpemventures/electrs-liquid
 
 To tag a new image with a new version:
 
-1) Create a new folder with `COMMIT` as directory name
-2) Modify the GH Action in `.github/workflows/docker-publish.yml` changing the ARG `COMMIT` with new created folder
+1) Create a new folder with `COMMIT` as directory name and change the `Dockerfile`s ARG `COMMIT`
+2) Modify the GH Action in `.github/workflows/docker-publish.yml` changing the `COMMIT` env var
 3) Push in master
