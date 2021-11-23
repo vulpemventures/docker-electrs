@@ -17,9 +17,6 @@ WORKDIR /build
 
 COPY --from=builder /electrs/target/release/electrs /build
 
-EXPOSE 3002
-EXPOSE 60401
-
 STOPSIGNAL SIGINT
 
 ENTRYPOINT ["/build/electrs"]
