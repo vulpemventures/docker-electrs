@@ -4,13 +4,13 @@ on:
   push:
     # Publish `master` as Docker `latest` image.
     branches:
-      - master
+      - 202205-workaround-vec-size
 
 env:
   # TODO: Change variable to your image's name.
   BITCOIN_IMAGE_NAME: electrs
   LIQUID_IMAGE_NAME: electrs-liquid
-  COMMIT: 253040e346664976c12e6c214ee2858a4dad2e06
+  COMMIT: 31e7367d907bffa2b8e6ed98ce8c361ecf02ca2b
 
 jobs:
   # Push image to GitHub Packages.
@@ -44,7 +44,6 @@ jobs:
         run:  >-
           docker buildx build --push 
           --file ./$COMMIT/Dockerfile 
-          --tag ghcr.io/vulpemventures/$BITCOIN_IMAGE_NAME:latest 
           --tag ghcr.io/vulpemventures/$BITCOIN_IMAGE_NAME:$COMMIT 
           --platform linux/arm64,linux/amd64 .
 
@@ -77,6 +76,5 @@ jobs:
         run:  >-
           docker buildx build --push 
           --file ./$COMMIT/Dockerfile.liquid 
-          --tag ghcr.io/vulpemventures/$LIQUID_IMAGE_NAME:latest 
           --tag ghcr.io/vulpemventures/$LIQUID_IMAGE_NAME:$COMMIT 
           --platform linux/arm64,linux/amd64 .
