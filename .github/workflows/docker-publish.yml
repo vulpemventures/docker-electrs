@@ -4,13 +4,13 @@ on:
   push:
     # Publish `master` as Docker `latest` image.
     branches:
-      - 202205-workaround-vec-size
+      - 202204-update-rust-bitcoin
 
 env:
   # TODO: Change variable to your image's name.
   BITCOIN_IMAGE_NAME: electrs
   LIQUID_IMAGE_NAME: electrs-liquid
-  COMMIT: 31e7367d907bffa2b8e6ed98ce8c361ecf02ca2b
+  COMMIT: ba1202769c6fb62ccb560bdd786598c62766dd9c
 
 jobs:
   # Push image to GitHub Packages.

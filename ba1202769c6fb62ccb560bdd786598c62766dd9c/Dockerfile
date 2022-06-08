@@ -1,11 +1,11 @@
 FROM rust:latest AS builder
 
-ARG COMMIT=31e7367d907bffa2b8e6ed98ce8c361ecf02ca2b
+ARG COMMIT=ba1202769c6fb62ccb560bdd786598c62766dd9c
 
 RUN apt-get update
 RUN apt-get install -y clang cmake
 
-RUN git clone https://github.com/blockstream/electrs && cd electrs && git checkout ${COMMIT}
+RUN git clone https://github.com/shesek/electrs && cd electrs && git checkout ${COMMIT}
 
 WORKDIR /electrs
 
