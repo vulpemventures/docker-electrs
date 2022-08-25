@@ -10,7 +10,7 @@ env:
   # TODO: Change variable to your image's name.
   BITCOIN_IMAGE_NAME: electrs
   LIQUID_IMAGE_NAME: electrs-liquid
-  COMMIT: 253040e346664976c12e6c214ee2858a4dad2e06
+  COMMIT: a808b51d0d9301fa82390b985c57551966001f9b
 
 jobs:
   # Push image to GitHub Packages.
