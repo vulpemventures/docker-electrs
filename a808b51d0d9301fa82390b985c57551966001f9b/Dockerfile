@@ -39,4 +39,4 @@ COPY entrypoint.sh /entrypoint.sh
 
 STOPSIGNAL SIGINT
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["bash", "/entrypoint.sh"]
