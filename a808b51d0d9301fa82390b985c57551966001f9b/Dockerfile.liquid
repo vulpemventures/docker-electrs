@@ -11,12 +11,21 @@ WORKDIR /electrs
 
 RUN cargo build --features liquid --release --bin electrs
 
+FROM debian:stable-slim AS websocat-installer
+
+RUN apt-get update
+RUN apt-get install -y wget
+
+COPY install-websocat.sh /install-websocat.sh
+RUN chmod +x /install-websocat.sh && /install-websocat.sh
+
 FROM debian:stable-slim
 
 WORKDIR /build
 
-COPY --from=builder /electrs/target/release/electrs /build
+COPY --from=builder /electrs/target/release/electrs /usr/local/bin
+COPY --from=websocat-installer /usr/local/bin/websocat /usr/local/bin
 
 STOPSIGNAL SIGINT
 
-ENTRYPOINT ["/build/electrs"]
+ENTRYPOINT ["bash", "/entrypoint.sh"]
