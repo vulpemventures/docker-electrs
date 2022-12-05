@@ -16,8 +16,9 @@ FROM debian:stable-slim AS websocat-installer
 RUN apt-get update
 RUN apt-get install -y wget
 
-COPY install-websocat.sh /install-websocat.sh
-RUN chmod +x /install-websocat.sh && /install-websocat.sh
+RUN wget https://github.com/vi/websocat/releases/download/v1.11.0/websocat.x86_64-unknown-linux-musl \
+    && chmod +x websocat.x86_64-unknown-linux-musl \
+    && mv websocat.x86_64-unknown-linux-musl /usr/local/bin/websocat
 
 FROM debian:stable-slim
 
