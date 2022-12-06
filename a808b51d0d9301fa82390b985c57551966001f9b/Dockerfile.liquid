@@ -2,6 +2,8 @@ FROM rust:latest AS builder
 
 ARG COMMIT=a808b51d0d9301fa82390b985c57551966001f9b
 
+ENV WS_PORT=1234
+
 RUN apt-get update
 RUN apt-get install -y clang cmake
 
@@ -27,6 +29,9 @@ WORKDIR /build
 COPY --from=builder /electrs/target/release/electrs /usr/local/bin
 COPY --from=websocat-installer /usr/local/bin/websocat /usr/local/bin
 
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 STOPSIGNAL SIGINT
 
-ENTRYPOINT ["bash", "/entrypoint.sh"]
+ENTRYPOINT /entrypoint.sh ${WS_PORT}
