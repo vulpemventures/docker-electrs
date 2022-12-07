@@ -2,6 +2,9 @@ FROM rust:latest AS builder
 
 ARG COMMIT=a808b51d0d9301fa82390b985c57551966001f9b
 
+ENV WS_PORT=1234
+ENV ELECTRUM_PORT=50001
+
 RUN apt-get update
 RUN apt-get install -y clang cmake
 
@@ -11,12 +14,25 @@ WORKDIR /electrs
 
 RUN cargo build --features liquid --release --bin electrs
 
+FROM debian:stable-slim AS websocat-installer
+
+RUN apt-get update
+RUN apt-get install -y wget
+
+RUN wget https://github.com/vi/websocat/releases/download/v1.11.0/websocat.x86_64-unknown-linux-musl \
+    && chmod +x websocat.x86_64-unknown-linux-musl \
+    && mv websocat.x86_64-unknown-linux-musl /usr/local/bin/websocat
+
 FROM debian:stable-slim
 
 WORKDIR /build
 
-COPY --from=builder /electrs/target/release/electrs /build
+COPY --from=builder /electrs/target/release/electrs /usr/local/bin
+COPY --from=websocat-installer /usr/local/bin/websocat /usr/local/bin
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 STOPSIGNAL SIGINT
 
-ENTRYPOINT ["/build/electrs"]
+ENTRYPOINT /entrypoint.sh ${WS_PORT} ${ELECTRUM_PORT}
