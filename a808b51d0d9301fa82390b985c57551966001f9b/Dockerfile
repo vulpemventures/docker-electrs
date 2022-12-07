@@ -4,6 +4,7 @@ FROM rust:latest AS builder
 ARG COMMIT=253040e346664976c12e6c214ee2858a4dad2e06
 
 ENV WS_PORT=1234
+ENV ELECTRUM_PORT=50001
 
 RUN apt-get update
 RUN apt-get install -y clang cmake 
@@ -34,4 +35,4 @@ RUN chmod +x /entrypoint.sh
 
 STOPSIGNAL SIGINT
 
-ENTRYPOINT /entrypoint.sh ${WS_PORT}
+ENTRYPOINT /entrypoint.sh ${WS_PORT} ${ELECTRUM_PORT}
